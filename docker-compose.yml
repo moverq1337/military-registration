@@ -1,0 +1,22 @@
+name: "service-boilerplate"
+version: "3.8"
+
+services:
+  redis:
+    image: redis:6.2.6
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+    restart: unless-stopped
+
+volumes:
+  redis_data:

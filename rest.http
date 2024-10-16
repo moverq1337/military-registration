@@ -1,0 +1,9 @@
+###
+POST http://localhost:8080/commision/doctor
+Content-Type: application/json
+
+{
+  "name": "Penis",
+  "surname": "Zharkov",
+  "cabient": "32"
+}

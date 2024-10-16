@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS doctors
+(
+    id      VARCHAR(255) NOT NULL PRIMARY KEY,
+    name    VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL,
+    cabinet VARCHAR(50)  NOT NULL,
+    type    VARCHAR(100) NOT NULL
+);

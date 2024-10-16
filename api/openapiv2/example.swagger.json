@@ -1,0 +1,103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Example Swagger",
+    "description": "Example description",
+    "version": "v1.0.0"
+  },
+  "tags": [
+    {
+      "name": "ExampleService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/example": {
+      "post": {
+        "summary": "Example request",
+        "description": "This is an example request to demonstrate adding examples to Swagger documentation.",
+        "operationId": "ExampleService_ExampleReq",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/Example"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Example description",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Example"
+            }
+          }
+        ],
+        "tags": [
+          "ExampleService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Example": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Название елки палки",
+          "title": "Title epta"
+        },
+        "description": {
+          "type": "string",
+          "description": "Что непонятного?! Это же бл описание",
+          "title": "Description"
+        }
+      },
+      "description": "Example description",
+      "title": "Example request motherfucker :)"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

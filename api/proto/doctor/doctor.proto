@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+option go_package = "github.com/neiasit/service-boilerplate/pkg/api/grpc/golang/doctor";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+service TherapistService{
+  rpc Next(NextRq) returns (NextRs) {
+    option(google.api.http) = {
+      post: "/therapist/next",
+      body: "*"
+    };
+  };
+  rpc FinalVerdict(FinalVerdictRq) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/therapist/verdict",
+      body: "*"
+    };
+  }
+}
+
+
+message FinalVerdictRq {
+  string userId = 1;
+  bool verdict = 2;
+}
+
+
+service DoctorService {
+  rpc Create(CreateRq) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/doctor/create",
+      body: "*"
+    };
+  };
+  rpc Next(NextRq) returns (NextRs) {
+    option(google.api.http) = {
+      post: "/doctor/next",
+      body: "*"
+    };
+  };
+  rpc GetHistory(GetHistoryRq) returns (GetHistoryRs){
+    option(google.api.http) = {
+      get: "/doctor/history",
+    };
+  };
+  rpc GetDoctorInfo(GetDoctorInfoRq) returns (GetDoctorInfoRs){
+    option(google.api.http) = {
+      get: "/doctor/info",
+    };
+  };
+  rpc GetAllDoctors(google.protobuf.Empty) returns (GetAllDoctorsRs){
+    option (google.api.http) = {
+      get: "/doctor/all"
+    };
+  };
+}
+
+message CreateRq {
+  string name = 1;
+  string surname = 2;
+  string cabinet = 3;
+  string type = 4;
+}
+
+message NextRq {
+  string doctorId = 1;
+  string userId = 2;
+  bool verdict = 3;
+}
+
+message NextRs {
+  string id = 1;
+  string name = 2;
+  string surname = 3;
+}
+
+message GetHistoryRq {
+  string id = 1;
+}
+
+message GetHistoryRs {
+  repeated GetHistoryItem items = 1;
+}
+
+message GetHistoryItem {
+  string id = 1;
+  string name = 2;
+  string surname = 3;
+  string endTime = 4;
+}
+
+message GetDoctorInfoRq {
+  string id = 1;
+}
+
+message GetDoctorInfoRs {
+  string id = 1;
+  string name = 2;
+  string surname = 3;
+  string cabinet = 4;
+  string type = 5;
+}
+
+message GetAllDoctorsRs {
+  repeated DoctorItem doctors = 1;
+}
+
+message DoctorItem {
+  string id = 1;
+  string name = 2;
+  string surname = 3;
+  string cabinet = 4;
+  string type = 5;
+}

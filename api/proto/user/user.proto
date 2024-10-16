@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option go_package = "github.com/neiasit/service-boilerplate/pkg/api/grpc/golang/user";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "doctor/doctor.proto";
+
+service UserService {
+  rpc CreateUser(CreateUserRq) returns (google.protobuf.Empty) {
+    option(google.api.http) = {
+      post: "/user/create",
+      body: "*"
+    };
+  };
+  rpc GetDoctors(GetDoctorsRq) returns (GetDoctorsRs){
+    option(google.api.http) = {
+      post: "/user/doctors",
+      body: "*"
+    };
+  };
+}
+
+message CreateUserRq {
+  string name = 1;
+  string surname = 2;
+}
+
+message GetDoctorsRq {
+  string id = 1;
+}
+
+
+
+message GetDoctorsRs {
+  repeated DoctorItem doctors = 1;
+}
+
